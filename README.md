@@ -109,7 +109,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
 | | The auditor will listen on that same multicast address and port and receive those datagrams and update its list of musician. |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | A payload consisting of the uuid of the musician as well as the sound it is emitting with its instrument and the last time it played music. If you format it as JSON, it could look like: {"uuid": "67ada557-547e-41f0-a7c1-ea743c756a41", "sound": "pouet"}|
+| | A payload consisting of the uuid of the musician as well as the sound it is emitting and optionally the last time it played music. If you format it as JSON, it could look like: {"uuid": "67ada557-547e-41f0-a7c1-ea743c756a41", "sound": "pouet"}. It's up to you to define the actual format, but the musician and the auditor have to agree.|
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
 | | I used a map to store instruments with their sounds. <br />Both the musician and the auditor will have this map.<br />On the musician side I use this map to get the sound that is playing in order to send it to the auditor.<br />On the auditor side I use this map to get the instrument played by the musician by using the sound it receives from the musician. |
 
