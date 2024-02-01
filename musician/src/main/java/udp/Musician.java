@@ -12,6 +12,9 @@ import java.util.logging.Logger;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+/**
+ * Enum representing different types of musical instruments, each associated with a specific sound.
+ */
 enum Instrument {
     PIANO("ti-ta-ti"),
     TRUMPET("pouet"),
@@ -25,10 +28,19 @@ enum Instrument {
         this.sound = sound;
     }
 
+    /**
+     * Gets the sound associated with the instrument.
+     * @return The sound of the instrument.
+     */
     public String getSound() {
         return sound;
     }
 
+    /**
+     * Converts a string to an Instrument enum.
+     * @param instrumentName The name of the instrument to convert.
+     * @return The corresponding Instrument enum, or null if no match is found.
+     */
     public static Instrument fromString(String instrumentName) {
         for (Instrument instrument : Instrument.values()) {
             if (instrument.name().equalsIgnoreCase(instrumentName)) {
@@ -39,11 +51,20 @@ enum Instrument {
     }
 }
 
+/**
+ * The Musician class simulates a musician who plays an instrument and sends its sound
+ * to a multicast group at regular intervals.
+ */
 class Musician {
     final static String IP_ADDR = "239.255.22.5";
     final static int PORT = 9904;
     private static final Logger LOG = Logger.getLogger(Musician.class.getName());
 
+    /**
+     * The main method that validates input arguments, creates a JSON object representing
+     * the musician's UUID and instrument sound, and sends it to a multicast group.
+     * @param args Command-line arguments specifying the instrument to play.
+     */
     public static void main(String[] args) {
         // Validate command-line arguments
         if (args.length != 1) {
@@ -82,6 +103,12 @@ class Musician {
         }
     }
 
+    /**
+     * Creates a JSON object with UUID and sound properties.
+     * @param uuid The UUID of the musician as a string.
+     * @param sound The sound of the instrument.
+     * @return A JsonObject with UUID and sound information.
+     */
     private static JsonObject createJsonObject(String uuid, String sound) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("uuid", uuid);
